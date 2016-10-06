@@ -10,7 +10,8 @@ resource "google_compute_network" "default" {
   auto_create_subnetworks = "false"
 }
 
-// Create a new instance
-//resource "google_compute_instance" "example" {
-//}
-
+resource "google_compute_subnetwork" "default" {
+  name          = "sub01"
+  ip_cidr_range = "10.0.0.0/16"
+  network       = "${google_compute_network.default.self_link}"
+}
