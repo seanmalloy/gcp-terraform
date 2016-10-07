@@ -15,3 +15,16 @@ resource "google_compute_subnetwork" "default" {
   ip_cidr_range = "10.0.0.0/16"
   network       = "${google_compute_network.default.self_link}"
 }
+
+resource "google_compute_firewall" "default" {
+  name    = "ssh"
+  network = "${google_compute_network.default.name}"
+  allow {
+    protocol = "icmp"
+  }
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+}
+
